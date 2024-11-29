@@ -1,0 +1,56 @@
+name: Renovate - Update dependencies
+on:
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: Override default log level
+        required: false
+        default: info
+        type: string
+      overrideSchedule:
+        description: Override all schedules
+        required: false
+        default: "false"
+        type: string
+ 
+concurrency: renovate
+jobs:
+  renovate:
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4.1.7
+
+      - name: Validate Renovate JSON
+        run: jq type .github/renovate.json
+      
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3.6.1
+        with:
+          driver: docker-container
+
+      - name: Create cache directory
+        run: mkdir -p /tmp/.buildx-cache
+
+      - name: Cache Docker layers
+        uses: actions/cache@v4.0.2
+        with:
+          path: /tmp/.buildx-cache
+          key: ${{ runner.os }}-buildx-layers-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-buildx-layers-
+
+      - name: Self-hosted Renovate
+        uses: renovatebot/github-action@v40.2.6
+        env:
+          RENOVATE_REPOSITORIES: ${{ github.repository }}
+          RENOVATE_ONBOARDING: "false"
+          RENOVATE_USERNAME: renovate[bot]
+          RENOVATE_GIT_AUTHOR: Renovate Bot <renovate[bot]@users.noreply.github.com>
+          #RENOVATE_PLATFORM_COMMIT: "true"
+          RENOVATE_FORCE: ${{ github.event.inputs.overrideSchedule == 'true' && '{''schedule'':null}' || '' }}
+          LOG_LEVEL: ${{ inputs.logLevel || 'info' }}
+          #RENOVATE_REPOSITORY_CACHE: true
+        with:
+          configurationFile: .github/renovate.json
+          token: ${{ secrets.GH_TOKEN }}
