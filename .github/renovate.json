@@ -4,5 +4,5 @@
       "github>ymickler/renovate-config//github-action.json",
       "github>ymickler/renovate-config//dockerfile.json"
    ],
-   "enabledManagers": ["github-actions", "dockerfile"],
+   "enabledManagers": ["github-actions", "dockerfile"]
 }
