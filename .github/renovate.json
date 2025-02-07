@@ -1,75 +1,8 @@
 {
    "$schema":"https://docs.renovatebot.com/renovate-schema.json",
    "extends":[
-      "config:recommended"
+      "github>ymickler/renovate-config//github-action.json",
+      "github>ymickler/renovate-config//dockerfile.json"
    ],
-   "vulnerabilityAlerts":{ 
-      "labels":[
-         "security"
-      ]
-   },
-   "timezone":"Europe/Berlin",
-   "rebaseWhen":"conflicted",
-   "recreateWhen": "always",
-   "dependencyDashboardAutoclose": true,
-   "packageRules":[
-      {
-         "matchManagers":[
-            "dockerfile"
-         ],
-         "matchUpdateTypes":[
-            "major"
-         ],
-         "labels":[
-            "dockerfile-major-update"
-         ],
-         "pinDigests":false,
-         "branchTopic":"major",
-         "matchPackageNames": ["nodered/node-red"],
-         "automerge": false
-      },
-      {
-         "matchManagers":[
-            "dockerfile"
-         ],
-         "matchUpdateTypes":[
-            "minor",
-            "patch"
-         ],
-         "labels":[
-            "dockerfile-minor-patch-update"
-         ],
-         "pinDigests":true,
-         "branchTopic":"minor-patch",
-         "matchPackageNames": ["nodered/node-red"],
-         "automerge": false
-      },
-      {
-         "matchManagers":[
-            "github-actions"
-         ],
-         "matchUpdateTypes":[
-            "minor",
-            "patch"
-         ],
-         "labels":[
-            "action-minor-patch-update"
-         ],
-         "pinDigests":false,
-         "automerge": false
-      },
-      {
-         "matchManagers":[
-            "github-actions"
-         ],
-         "labels":[
-            "action-major-update"
-         ],
-         "matchUpdateTypes":[
-            "major"
-         ],
-         "pinDigests":false,
-         "automerge": false
-      }
-   ]
+   "enabledManagers": ["github-actions", "dockerfile"],
 }
