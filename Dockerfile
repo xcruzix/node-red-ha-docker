@@ -1,4 +1,4 @@
-FROM docker.io/nodered/node-red:4.0.8-20
+FROM docker.io/nodered/node-red:4.0.9-20
 
 RUN npm install node-red-contrib-actionflows \
         # https://flows.nodered.org/node/node-red-contrib-actionflows
