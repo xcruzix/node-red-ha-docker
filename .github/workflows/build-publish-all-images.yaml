@@ -25,6 +25,13 @@ jobs:
                 username: ${{ github.actor }}
                 password: ${{ secrets.GH_TOKEN }}
 
+            - name: Extract Node-RED version
+              id: extract_version
+              run: |
+                VERSION=$(grep -oP '(?<=FROM docker.io/nodered/node-red:)[^ ]+' Dockerfile)
+                echo "NODE_RED_VERSION=$VERSION" >> $GITHUB_ENV
+                echo "Node Red version: $VERSION"
+
             - name: Build and push Docker image
               uses: docker/build-push-action@v6.13.0
               with:
