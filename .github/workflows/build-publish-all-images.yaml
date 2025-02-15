@@ -3,10 +3,10 @@ name: Build and Publish Docker Image
 on:
     workflow_dispatch:
     push:
-      branches:
-        - main
-    schedule:
-        - cron: "0 0 */2 * *"
+    branches:
+      - main
+    paths:
+      - Dockerfile
 
 jobs:
     build-and-publish:
@@ -25,13 +25,6 @@ jobs:
                 registry: ghcr.io
                 username: ${{ github.actor }}
                 password: ${{ secrets.GH_TOKEN }}
-
-            - name: Extract Node-RED version
-              id: extract_version
-              run: |
-                VERSION=$(grep -oP '(?<=FROM docker.io/nodered/node-red:)[^ ]+' Dockerfile)
-                echo "NODE_RED_VERSION=$VERSION" >> $GITHUB_ENV
-                echo "Node Red version: $VERSION"
 
             - name: Build and push Docker image
               uses: docker/build-push-action@v6.13.0
