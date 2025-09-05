@@ -1,8 +1,3 @@
-# --- Renovate test stage (tiny, safe, unused) ---
-FROM alpine:3.22.1 AS renovate-automerge-test
-RUN true
-
-# Real image construction
 FROM docker.io/nodered/node-red:4.1.0
 
 RUN npm install node-red-contrib-actionflows \
