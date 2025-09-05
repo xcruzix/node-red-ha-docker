@@ -1,5 +1,5 @@
 # --- Renovate test stage (tiny, safe, unused) ---
-FROM alpine:3.22.0 AS renovate-automerge-test
+FROM alpine:3.22.1 AS renovate-automerge-test
 RUN true
 
 # Real image construction
