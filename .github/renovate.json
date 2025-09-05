@@ -5,8 +5,12 @@
     "github>ymickler/renovate-config//dockerfile.json"
   ],
   "enabledManagers": ["github-actions", "dockerfile"],
+
   "packageRules": [
     { "matchManagers": ["dockerfile"], "automerge": true },
     { "matchManagers": ["github-actions"], "automerge": true }
-  ]
+  ],
+
+  "platformAutomerge": false,
+  "ignoreTests": true
 }
