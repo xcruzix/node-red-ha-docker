@@ -1,4 +1,4 @@
-FROM docker.io/nodered/node-red:4.1.0
+FROM docker.io/nodered/node-red:4.1.1
 
 # Install extra nodes into the Node-RED container image
 # (Base image uses USER node-red and WORKDIR /usr/src/node-red)
