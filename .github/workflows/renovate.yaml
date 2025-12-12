@@ -33,7 +33,7 @@ jobs:
         run: mkdir -p /tmp/.buildx-cache
 
       - name: Cache Docker layers
-        uses: actions/cache@v5.0.0
+        uses: actions/cache@v5.0.1
         with:
           path: /tmp/.buildx-cache
           key: ${{ runner.os }}-buildx-layers-${{ github.sha }}
@@ -41,7 +41,7 @@ jobs:
             ${{ runner.os }}-buildx-layers-
 
       - name: Self-hosted Renovate
-        uses: renovatebot/github-action@v44.0.5
+        uses: renovatebot/github-action@v44.1.0
         env:
           RENOVATE_REPOSITORIES: ${{ github.repository }}
           RENOVATE_ONBOARDING: "false"
