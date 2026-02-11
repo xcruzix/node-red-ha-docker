@@ -33,7 +33,7 @@ jobs:
                 echo "Node Red version: $VERSION"
 
             - name: Build and push Docker image
-              uses: docker/build-push-action@v6.18.0
+              uses: docker/build-push-action@v6.19.0
               with:
                 context: .
                 file: Dockerfile
