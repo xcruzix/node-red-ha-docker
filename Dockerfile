@@ -1,4 +1,4 @@
-FROM docker.io/nodered/node-red:4.1.8
+FROM docker.io/nodered/node-red:4.1.9
 
 RUN npm install --unsafe-perm --no-update-notifier --no-fund --omit=dev \
     node-red-contrib-actionflows \
